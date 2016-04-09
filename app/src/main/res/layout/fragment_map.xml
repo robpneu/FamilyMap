@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:id="@+id/map_fragment">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/map"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="15"
+              class="com.amazon.geo.mapsv2.SupportMapFragment"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="80"
+        android:id="@+id/eventPersonInfo">
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="fill_parent"/>
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/gender_image_view"
+            android:padding="@dimen/abc_button_inset_vertical_material"
+            android:layout_gravity="center"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Click on a marker"
+                android:id="@+id/eventPerson"
+                android:layout_weight="1"
+                android:gravity="bottom"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="to see event details"
+                android:id="@+id/eventDetails"
+                android:layout_weight="1"
+                android:gravity="top|left"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

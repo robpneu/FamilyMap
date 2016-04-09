@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.byu.robpneu.cs240.familymap.ui.FilterActivity">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/filter_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.90"
+                android:measureWithLargestChild="false">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/baptismEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Baptism Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY BAPTISM EVENTS"
+                    android:id="@+id/lifeStoryLines"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/baptismEventsSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/birthEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Birth Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILETER BY BIRTH EVENTS"
+                    android:id="@+id/birthevents"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/birthEventsSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/spouseLinesID"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Census Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:id="@+id/censeus"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"
+                    android:text="FILTER BY CENSUS EVENTS"/>
+
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/censusEventsSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="0.90"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/christeningEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Christening Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY CHRISTENING EVENTS"
+                    android:id="@+id/christeningEvents"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/christenEventsSwtich"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/deathEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Death Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY DEATH EVENTS"
+                    android:id="@+id/deathEvents"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:id="@+id/deathEventsSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1"
+            >
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/marriageEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Marriage Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY MARRIAGE EVENTS"
+                    android:id="@+id/marriageEventsDescription"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/marriageEventsSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/fathersSide"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Father&apos;s Side"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY FATHER&apos;S SIDE OF THE FAMILY"
+                    android:id="@+id/fathersSide"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/fatherSideSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/mothersSide"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Mother&apos;s Side"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER BY MOTHER&apos;S SIDE OF THE FAMILY"
+                    android:id="@+id/motherSide"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/motherSideSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView9"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Male Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER EVENTSBASED ON GENDER"
+                    android:id="@+id/maleEvents"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/maleEventSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.9">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/femalEvents"
+                    android:linksClickable="true"
+                    android:foregroundTintMode="multiply"
+                    android:singleLine="false"
+                    android:paddingTop="10dp"
+                    android:text="Female Events"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="FILTER EVENTSBASED ON GENDER"
+                    android:id="@+id/femaleEvents"
+                    android:singleLine="false"
+                    android:paddingLeft="5dp"/>
+            </LinearLayout>
+
+            <Switch
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/femaleEventSwitch"
+                android:checked="false"
+                android:layout_gravity="right"
+                android:layout_weight=".1"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" >
+
+        </View>
+
+    </LinearLayout>-->
+
+</RelativeLayout>
