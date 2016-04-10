@@ -1,5 +1,6 @@
 package edu.byu.robpneu.cs240.familymap.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -66,10 +67,14 @@ public class SearchActivity extends AppCompatActivity {
 
 	private void updateUI(String searchTerm) {
 		if (searchTerm.length() > 0) {
-			List<Item> items = FamilyMap.getInstance().searchAll(searchTerm);
+			List<Item> items = mFamilyMap.searchAll(searchTerm);
 			mSearchAdapter = new SearchAdapter(items);
 			mSearchRecyclerView.setAdapter(mSearchAdapter);
 		}
+	}
+
+	public interface Item {
+		boolean contains(String search);
 	}
 
 	private class SearchHolder extends  RecyclerView.ViewHolder implements View.OnClickListener{
@@ -99,10 +104,10 @@ public class SearchActivity extends AppCompatActivity {
 				String gender = person.getGender();
 				switch (gender){
 					case "f":
-						mImageView.setImageDrawable(FamilyMap.getInstance().getFemaleIcon());
+						mImageView.setImageDrawable(mFamilyMap.getFemaleIcon());
 						break;
 					case "m":
-						mImageView.setImageDrawable(FamilyMap.getInstance().getMaleIcon());
+						mImageView.setImageDrawable(mFamilyMap.getMaleIcon());
 						break;
 					default:
 						mImageView.setImageDrawable(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_thumbs_down).sizeDp(60));
@@ -113,9 +118,9 @@ public class SearchActivity extends AppCompatActivity {
 			else if(mItem.getClass() == Event.class){
 				Event event = (Event)mItem;
 				mDescription.setText(event.toString());
-				Person person = FamilyMap.getInstance().getPerson(event.getPersonID());
-//				Filter filter = FamilyMap.getInstance().getFilterMap().get(event.getEventID());//.color(filter.getColor())
-				mImageView.setImageDrawable(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_map_marker));
+				Person person = mFamilyMap.getPerson(event.getPersonID());
+				Filter filter = mFamilyMap.getFilterMap().get(event.getDescription());//.color(filter.getHSVColor())
+				mImageView.setImageDrawable(filter.getIcon());
 				if (person != null){
 					mSubDescription.setText(person.getFullName());
 				}
@@ -136,7 +141,10 @@ public class SearchActivity extends AppCompatActivity {
 		@Override
 		public void onClick(View v) {
 			if (mItem.getClass() == Person.class){
-				// TODO launch a person activity
+				Person person = (Person) mItem;
+				Intent intent = new Intent(getApplicationContext(), PersonActivity.class);
+				intent.putExtra("PERSON_ID", person.getPersonID());
+				startActivity(intent);
 			}
 			else if(mItem.getClass() == Event.class){
 				// TODO launch a map activity
@@ -215,9 +223,5 @@ public class SearchActivity extends AppCompatActivity {
 		public int getItemCount() {
 			return mItemList.size();
 		}
-	}
-
-	public interface Item{
-		boolean contains(String search);
 	}
 }

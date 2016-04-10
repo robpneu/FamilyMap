@@ -11,30 +11,30 @@
     tools:context=".ui.PersonActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/first_name"
-            android:linksClickable="true"
-            android:foregroundTintMode="multiply"
-            android:singleLine="false"
-            android:paddingTop="10dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="FIRST NAME"
+            android:foregroundTintMode="multiply"
+            android:linksClickable="true"
+            android:paddingTop="10dp"
+            android:singleLine="false"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <TextView
             android:id="@+id/firstNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
             android:singleLine="false"
-            android:paddingLeft="5dp"/>
+            android:text="FIRST NAME"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <View
             android:layout_width="match_parent"
@@ -42,23 +42,23 @@
             android:background="#000000" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
             android:id="@+id/last_name"
-            android:linksClickable="true"
-            android:foregroundTintMode="multiply"
-            android:singleLine="false"
-            android:paddingTop="10dp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="LAST NAME"
-            android:id="@+id/textView2"
+            android:foregroundTintMode="multiply"
+            android:linksClickable="true"
+            android:paddingTop="10dp"
             android:singleLine="false"
-            android:paddingLeft="5dp"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <TextView
+            android:id="@+id/lastNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:singleLine="false"
+            android:text="LAST NAME"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <View
             android:layout_width="match_parent"
@@ -66,23 +66,23 @@
             android:background="#000000" />
 
         <TextView
+            android:id="@+id/gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/gender"
-            android:linksClickable="true"
             android:foregroundTintMode="multiply"
+            android:linksClickable="true"
+            android:paddingTop="10dp"
             android:singleLine="false"
-            android:paddingTop="10dp"/>
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <TextView
+            android:id="@+id/genderLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="GENDER"
-            android:id="@+id/textView4"
+            android:paddingLeft="5dp"
             android:singleLine="false"
-            android:paddingLeft="5dp"/>
+            android:text="GENDER"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
 
         <View
             android:layout_width="match_parent"
@@ -91,11 +91,11 @@
             android:paddingBottom="10dp"/>
 
         <ExpandableListView
+            android:id="@+id/person_details"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
-            android:id="@+id/person_details"
-            android:dividerHeight="0.5dp"/>
+            android:dividerHeight="0.5dp"
+            android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"/>
     </LinearLayout>
 
 </RelativeLayout>

@@ -29,15 +29,15 @@ public class MainActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		if(savedInstanceState.containsKey("logout")){
-			onLogout();
+		if (savedInstanceState != null) {
+			if (savedInstanceState.containsKey("logout")) {
+				onLogout();
+			} else if (savedInstanceState.containsKey("resync")) {
+				onLogin();
+			}
 		}
-		else if(savedInstanceState.containsKey("resync")){
-			onLogin();
-		}
-
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+//		setContentView(R.layout.activity_main);
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment;
 
@@ -54,22 +54,39 @@ public class MainActivity extends AppCompatActivity {
 
 
 		if (!FamilyMap.getInstance().isLoggedIn()){
-			mloginFragment = (LoginFragment)fm.findFragmentById(R.id.fragment_container);
+			mloginFragment = fm.findFragmentById(R.id.main_fragment_container);
 			if (mloginFragment == null){
 				mloginFragment = new LoginFragment();
-				fm.beginTransaction().add(R.id.fragment_container, mloginFragment).commit();
+				fm.beginTransaction().add(R.id.main_fragment_container, mloginFragment).commit();
 			}
 		}
 		else {
-			fragment = (MyMapFragment)fm.findFragmentById(R.id.fragment_container);
+			fragment = fm.findFragmentById(R.id.main_fragment_container);
 			if(fragment == null){
 				mMapFragment = new MyMapFragment();
 				fm.beginTransaction()
-						.add(R.id.fragment_container, mMapFragment)
+						.add(R.id.main_fragment_container, mMapFragment)
 						.commit();
 			}
 		}
 		setContentView(R.layout.activity_main);
+	}
+
+	public void onLogout() {
+		// TODO make sure I go to top before running this? I think I'll already be at the top...
+		FragmentManager fragmentManager = getSupportFragmentManager();
+		fragmentManager.beginTransaction().remove(mMapFragment);
+		if (mloginFragment == null) {
+			mloginFragment = new LoginFragment();
+		}
+		fragmentManager.beginTransaction().add(R.id.main_fragment_container, mloginFragment).commit();
+		FamilyMap.getInstance().logout();
+	}
+
+	public void onLogin() {
+		DownloadPeople downloadPeople = new DownloadPeople();
+		downloadPeople.execute();
+		// Download events is called by download people.
 	}
 
 	/**
@@ -107,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 		MenuItem filterMenu = menu.findItem(R.id.menu_item_filter);
 		MenuItem settingsMenu = menu.findItem(R.id.menu_item_settings);
 
-		if(!FamilyMap.getInstance().isLoggedIn()){
+		if (!FamilyMap.getInstance().isLoggedIn()) {
 			searchMenu.setVisible(false);
 			filterMenu.setVisible(false);
 			settingsMenu.setVisible(false);
@@ -135,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent = null;
-		switch (item.getItemId()){
+		switch (item.getItemId()) {
 			case R.id.menu_item_search:
 				intent = new Intent(getApplicationContext(), SearchActivity.class);
 				startActivity(intent);
@@ -151,12 +168,6 @@ public class MainActivity extends AppCompatActivity {
 			default:
 				return super.onOptionsItemSelected(item);
 		}
-	}
-
-	public void onLogin(){
-		DownloadPeople downloadPeople = new DownloadPeople();
-		downloadPeople.execute();
-		// Download events is called by download people.
 	}
 
 	public class DownloadPeople extends AsyncTask<URL, Integer, String>{
@@ -269,21 +280,10 @@ public class MainActivity extends AppCompatActivity {
 
 				}
 				fm.beginTransaction()
-						.add(R.id.fragment_container, mMapFragment)
+						.add(R.id.main_fragment_container, mMapFragment)
 						.commit();
 			}
 		}
 
-	}
-
-	public void onLogout(){
-		// TODO make sure I go to top before running this? I think I'll already be at the top...
-		FragmentManager fragmentManager = getSupportFragmentManager();
-		fragmentManager.beginTransaction().remove(mMapFragment);
-		if(mloginFragment == null){
-			mloginFragment = new LoginFragment();
-		}
-		fragmentManager.beginTransaction().add(R.id.fragment_container, mloginFragment).commit();
-		FamilyMap.getInstance().logout();
 	}
 }

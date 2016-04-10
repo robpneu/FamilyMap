@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="vertical"
+<RelativeLayout
+    android:id="@+id/search_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:id="@+id/search_layout"
-                android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
         android:id="@+id/search_image_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_gravity="center_vertical"/>
 
@@ -17,23 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/search_image_view"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="(Person Name) or (Event information)"
-        android:paddingTop="10dp"/>
+        android:paddingTop="10dp"
+        android:text="(Person Name) or (Event information)"/>
 
     <TextView
         android:id="@+id/search_subdescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="([blank]) or (Person Name)"
         android:layout_below="@id/search_description"
-        android:paddingLeft="10dp"/>
+        android:layout_toRightOf="@+id/search_image_view"
+        android:paddingLeft="10dp"
+        android:text="([blank]) or (Person Name)"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#000000"
-        android:layout_below="@id/search_subdescription"/>
+        android:layout_below="@id/search_subdescription"
+        android:background="#000000"/>
 
 </RelativeLayout>

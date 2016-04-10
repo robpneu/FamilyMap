@@ -1,5 +1,9 @@
 package edu.byu.robpneu.cs240.familymap.model;
 
+import android.graphics.Color;
+
+import com.joanzapata.android.iconify.IconDrawable;
+
 import java.util.Locale;
 import java.util.Random;
 
@@ -11,6 +15,7 @@ public class Filter {
 	private String mDescription;
 	private String mFilterKey;
 	private boolean mShown;
+	private IconDrawable mIcon;
 	private int mColor;
 
 	public Filter(String filterKey){
@@ -35,7 +40,7 @@ public class Filter {
 		return mDescription;
 	}
 
-	public int getColor() {
+	public int getHSVColor() {
 		return mColor;
 	}
 
@@ -45,5 +50,18 @@ public class Filter {
 
 	public void setShown(boolean shown) {
 		this.mShown = shown;
+	}
+
+	public IconDrawable getIcon() {
+		return mIcon.color(getColor());
+	}
+
+	public int getColor() {
+		float[] color = {mColor, 1, 1};
+		return Color.HSVToColor(color);
+	}
+
+	public void setIcon(IconDrawable icon) {
+		mIcon = icon;
 	}
 }

@@ -20,8 +20,8 @@ public class Login {
 		// Default login info to speed up debugging/testing
 		mUserName = "r";
 		mPassword = "n";
-		mServerHost = "10.25.100.50";
-//		mServerHost = "10.10.10.43";
+//		mServerHost = "10.25.100.50";
+		mServerHost = "10.10.10.43";
 		mServerPort = "8081";
 
 		// TA Credentials
@@ -82,11 +82,11 @@ public class Login {
 		mAuthToken = authToken;
 	}
 
-	public void setPersonID(String personID) {
-		mPersonID = personID;
-	}
-
 	public String getPersonID() {
 		return mPersonID;
+	}
+
+	public void setPersonID(String personID) {
+		mPersonID = personID;
 	}
 }

@@ -121,6 +121,58 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		return v;
 	}
 
+	/**
+	 * Put all of the vent pins onto the map
+	 */
+	private void putEventPins() {
+		Map<String, Event> mEvents = mFamilyMap.getEventMap();
+		Map<String, Filter> mFilters = mFamilyMap.getFilterMap();
+		Iterator it = mEvents.entrySet().iterator();
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry) it.next();
+			Event event = (Event) pair.getValue();
+
+			boolean putMarkerOnMap = false;
+
+			String gender = mFamilyMap
+					.getPerson(event.getPersonID())
+					.getGender();
+			if (mFilters.get(gender).isShown()) {
+				putMarkerOnMap = true;
+			}
+
+			if (putMarkerOnMap == true) {
+				Person person = mFamilyMap.getPerson(event.getPersonID());
+				String familySide = person.getFamilySide();
+				if (familySide == "none") {
+					if (!mFilters.get("father").isShown() & !mFilters.get("mother").isShown()) {
+						putMarkerOnMap = false;
+					}
+				} else {
+					if (!mFilters.get(familySide).isShown()) {
+						putMarkerOnMap = false;
+					}
+				}
+			}
+
+			int markerColor = 0;
+			if (putMarkerOnMap == true) {
+				Filter filter = mFilters.get(event.getDescription());
+				putMarkerOnMap = filter.isShown();
+				markerColor = filter.getHSVColor();
+			}
+			LatLng pnt = new LatLng(event.getLatitude(), event.getLongitude());
+			MarkerOptions options = new MarkerOptions().position(pnt)
+					.title(event.getCity() + ", " + event.getCountry())
+					.snippet(pnt.toString())
+					.icon(BitmapDescriptorFactory.defaultMarker(markerColor));
+			if (putMarkerOnMap) {
+				Marker marker = mAmazonMap.addMarker(options);
+				mEventHashMap.put(marker.hashCode(), event);
+			}
+		}
+	}
+
 	private void updateMarkerDetails(Event event){
 		Person person = mFamilyMap.getPerson(event.getPersonID());
 		currentEvent = event;
@@ -137,58 +189,5 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		}
 		personName.setText(person.getFullName());
 		personDetails.setText(event.toString());
-	}
-
-	/**
-	 * Put all of the vent pins onto the map
-	 */
-	private void putEventPins(){
-		Map<String, Event> mEvents = mFamilyMap.getEventMap();
-		Map<String, Filter> mFilters = mFamilyMap.getFilterMap();
-		Iterator it = mEvents.entrySet().iterator();
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			Event event = (Event)pair.getValue();
-
-			boolean putMarkerOnMap = false;
-
-			String gender = mFamilyMap
-					.getPerson(event.getPersonID())
-					.getGender();
-			if (mFilters.get(gender).isShown()){
-				putMarkerOnMap = true;
-			}
-
-			if (putMarkerOnMap == true){
-				Person person = mFamilyMap.getPerson(event.getPersonID());
-				String familySide = person.getFamilySide();
-				if (familySide == "none"){
-					if (!mFilters.get("father").isShown() & !mFilters.get("mother").isShown()){
-						putMarkerOnMap = false;
-					}
-				}
-				else {
-					if (!mFilters.get(familySide).isShown()) {
-						putMarkerOnMap = false;
-					}
-				}
-			}
-
-			int markerColor = 0;
-			if (putMarkerOnMap == true) {
-				Filter filter = mFilters.get(event.getDescription());
-				putMarkerOnMap = filter.isShown();
-				markerColor = filter.getColor();
-			}
-			LatLng pnt = new LatLng(event.getLatitude(), event.getLongitude());
-			MarkerOptions options = new MarkerOptions().position(pnt)
-					.title(event.getCity() + ", " + event.getCountry())
-					.snippet(pnt.toString())
-					.icon(BitmapDescriptorFactory.defaultMarker(markerColor));
-			if (putMarkerOnMap) {
-				Marker marker = mAmazonMap.addMarker(options);
-				mEventHashMap.put(marker.hashCode(), event);
-			}
-		}
 	}
 }

@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    android:id="@+id/list_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/item_image_view"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="center_vertical"/>
 
     <TextView
         android:id="@+id/expanded_list_item"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:paddingTop="10dp"/>
+
+    <TextView
+        android:id="@+id/item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/item_image_view"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"/>
+        android:text="(Person Name) or (Event information)"/>
+
+    <TextView
+        android:id="@+id/item_subdescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_description"
+        android:paddingLeft="10dp"
+        android:text="([blank]) or (Person Name)"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/item_subdescription"
+        android:background="#000000"/>
+
 
 </RelativeLayout>

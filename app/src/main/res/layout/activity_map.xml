@@ -10,4 +10,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.byu.robpneu.cs240.familymap.ui.MapActivity">
 
+
+    <FrameLayout
+        android:id="@+id/map_fragment_container"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </FrameLayout>
+
 </RelativeLayout>

@@ -6,7 +6,7 @@ import edu.byu.robpneu.cs240.familymap.ui.SearchActivity;
  * @author Robert P Neu
  * @version 1.0 3/26/16
  */
-public class Event implements SearchActivity.Item{
+public class Event implements SearchActivity.Item, Comparable<Event> {
 	private String mEventID;
 	private String mPersonID;
 	private double mLatitude;
@@ -77,22 +77,6 @@ public class Event implements SearchActivity.Item{
 		mCity = city;
 	}
 
-	public String getDescription() {
-		return mDescription;
-	}
-
-	public void setDescription(String description) {
-		mDescription = description;
-	}
-
-	public Double getYear() {
-		return mYear;
-	}
-
-	public void setYear(Double year) {
-		mYear = year;
-	}
-
 	public String getDescendant() {
 		return mDescendant;
 	}
@@ -101,20 +85,69 @@ public class Event implements SearchActivity.Item{
 		mDescendant = descendant;
 	}
 
-	public String toString(){
+	public String toString() {
 		return mDescription.toLowerCase() + ": " + mCity + ", " + mCountry + " (" + mYear.intValue() + ")";
 	}
 
 	@Override
 	public boolean contains(String search) {
-		if(mCountry.contains(search))
+		if (mCountry.contains(search))
 			return true;
-		if(mCity.contains(search))
+		if (mCity.contains(search))
 			return true;
-		if(mYear.toString().contains(search))
+		if (mYear.toString().contains(search))
 			return true;
-		if(mDescription.contains(search))
-			return true;
-		return false;
+		return mDescription.contains(search);
+	}
+
+	/**
+	 * Compares this object to the specified object to determine their relative
+	 * order.
+	 *
+	 * @param another the object to compare to this instance.
+	 * @return a negative integer if this instance is less than {@code another};
+	 * a positive integer if this instance is greater than
+	 * {@code another}; 0 if this instance has the same order as
+	 * {@code another}.
+	 * @throws ClassCastException if {@code another} cannot be converted into something
+	 *                            comparable to {@code this} instance.
+	 */
+	@Override
+	public int compareTo(Event another) {
+		if (mDescription.equals("birth"))
+			return -1;
+		else if (mDescription.equals("death"))
+			return 1;
+		else {
+			if (mYear != null & another.getYear() != null) {
+				if (mYear > another.getYear())
+					return 1;
+				else if (mYear < another.getYear())
+					return -1;
+				else
+					return mDescription.compareTo(another.getDescription());
+			} else if (mYear == null)
+				return -1;
+			else if (another.getYear() == null)
+				return 1;
+			else
+				return mDescription.compareTo(another.getDescription());
+		}
+	}
+
+	public Double getYear() {
+		return mYear;
+	}
+
+	public String getDescription() {
+		return mDescription;
+	}
+
+	public void setDescription(String description) {
+		mDescription = description;
+	}
+
+	public void setYear(Double year) {
+		mYear = year;
 	}
 }

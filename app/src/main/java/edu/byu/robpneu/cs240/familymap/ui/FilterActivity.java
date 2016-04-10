@@ -17,8 +17,6 @@ import android.widget.TextView;
 import com.joanzapata.android.iconify.IconDrawable;
 import com.joanzapata.android.iconify.Iconify;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import edu.byu.robpneu.cs240.familymap.R;
@@ -71,8 +69,7 @@ public class FilterActivity extends AppCompatActivity {
 			mSubDescription.setTextColor(Color.BLACK);
 			mSwitch.setChecked(mFilter.isShown());
 			mSwitch.setOnCheckedChangeListener(this);
-			float[] color = {filter.getColor(), 1, 1};
-			mImageView.setImageDrawable(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_circle).sizeDp(30).color(Color.HSVToColor(color)));
+			mImageView.setImageDrawable(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_circle).sizeDp(30).color(filter.getColor()));
 		}
 
 		/**

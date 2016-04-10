@@ -1,8 +1,9 @@
 package edu.byu.robpneu.cs240.familymap.model;
 
-import android.graphics.drawable.Drawable;
+import com.joanzapata.android.iconify.IconDrawable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -24,14 +25,15 @@ public class FamilyMap {
 	private Map<String, Filter> mCustomFilters;
 	private List<Filter> mConstantFilters;
 
-	private Drawable maleIcon;
-	private Drawable femaleIcon;
-	private Drawable androidIcon;
-	private Drawable eventIcon;
-	private Drawable searchIcon;
-	private Drawable filterIcon;
-	private Drawable gearIcon;
-	private Drawable doubleUpIcon;
+	private IconDrawable maleIcon;
+	private IconDrawable femaleIcon;
+	private IconDrawable androidIcon;
+	private IconDrawable eventIcon;
+	private IconDrawable searchIcon;
+	private IconDrawable filterIcon;
+	private IconDrawable gearIcon;
+	private IconDrawable doubleUpIcon;
+	private IconDrawable mapMarkerIcon;
 
 	private FamilyMap(){
 		mLoggedIn = false;
@@ -80,6 +82,21 @@ public class FamilyMap {
 
 	public Map<String, Person> getPersonMap(){
 		return mPersonMap;
+	}
+
+	public List<Object> getFamilyByPerson(String personID) {
+		Person person = mPersonMap.get(personID);
+		List<Object> family = new ArrayList<>();
+		if (person.getFatherID() != null) {
+			family.add(mPersonMap.get(person.getFatherID()));
+		}
+		if (person.getMotherID() != null) {
+			family.add(mPersonMap.get(person.getMotherID()));
+		}
+		if (person.getSpouseID() != null) {
+			family.add(mPersonMap.get(person.getSpouseID()));
+		}
+		return family;
 	}
 
 	private void assignFamilySide(){
@@ -147,9 +164,24 @@ public class FamilyMap {
 		return mEventMap;
 	}
 
+	public List<Object> getEventsByPerson(String personID) {
+		List<Event> events = new ArrayList<>();
+		for (Event e : mEventMap.values()) {
+			if (personID.equals(e.getPersonID()))
+				events.add(e);
+		}
+
+		Collections.sort(events);
+		List<Object> list = new ArrayList<>();
+		list.addAll(events);
+		return list;
+	}
+
+
 
 	public void addFilter(Filter filter){
 		mCustomFilters.put(filter.getFilterKey(), filter);
+		filter.setIcon(eventIcon);
 	}
 
 	public List<Filter> getFiltersList() {
@@ -184,71 +216,69 @@ public class FamilyMap {
 	}
 
 
-
-	public Drawable getMaleIcon() {
+	public IconDrawable getMaleIcon() {
 		return maleIcon;
 	}
 
-	public void setMaleIcon(Drawable maleIcon) {
+	public void setMaleIcon(IconDrawable maleIcon) {
 		this.maleIcon = maleIcon;
 	}
 
-	public Drawable getFemaleIcon() {
+	public IconDrawable getFemaleIcon() {
 		return femaleIcon;
 	}
 
-	public void setFemaleIcon(Drawable femaleIcon) {
+	public void setFemaleIcon(IconDrawable femaleIcon) {
 		this.femaleIcon = femaleIcon;
 	}
 
-	public Drawable getAndroidIcon() {
+	public IconDrawable getAndroidIcon() {
 		return androidIcon;
 	}
 
-	public void setAndroidIcon(Drawable androidIcon) {
+	public void setAndroidIcon(IconDrawable androidIcon) {
 		this.androidIcon = androidIcon;
 	}
 
-	public Drawable getEventIcon() {
+	public IconDrawable getEventIcon() {
 		return eventIcon;
 	}
 
-	public void setEventIcon(Drawable eventIcon) {
+	public void setEventIcon(IconDrawable eventIcon) {
 		this.eventIcon = eventIcon;
 	}
 
-	public Drawable getSearchIcon() {
+	public IconDrawable getSearchIcon() {
 		return searchIcon;
 	}
 
-	public void setSearchIcon(Drawable searchIcon) {
+	public void setSearchIcon(IconDrawable searchIcon) {
 		this.searchIcon = searchIcon;
 	}
 
-	public Drawable getFilterIcon() {
+	public IconDrawable getFilterIcon() {
 		return filterIcon;
 	}
 
-	public void setFilterIcon(Drawable filterIcon) {
+	public void setFilterIcon(IconDrawable filterIcon) {
 		this.filterIcon = filterIcon;
 	}
 
-	public Drawable getGearIcon() {
+	public IconDrawable getGearIcon() {
 		return gearIcon;
 	}
 
-	public void setGearIcon(Drawable gearIcon) {
+	public void setGearIcon(IconDrawable gearIcon) {
 		this.gearIcon = gearIcon;
 	}
 
-	public Drawable getDoubleUpIcon() {
+	public IconDrawable getDoubleUpIcon() {
 		return doubleUpIcon;
 	}
 
-	public void setDoubleUpIcon(Drawable doubleUpIcon) {
+	public void setDoubleUpIcon(IconDrawable doubleUpIcon) {
 		this.doubleUpIcon = doubleUpIcon;
 	}
-
 
 
 	public void logout(){
