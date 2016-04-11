@@ -96,6 +96,15 @@ public class FamilyMap {
 		if (person.getSpouseID() != null) {
 			family.add(mPersonMap.get(person.getSpouseID()));
 		}
+		for (Person p : mPersonMap.values()) {
+			if (p.getFatherID() != null) {
+				if (p.getFatherID().equals(person.getPersonID()))
+					family.add(p);
+			} else if (p.getMotherID() != null) {
+				if (p.getMotherID().equals(person.getPersonID()))
+					family.add(p);
+			}
+		}
 		return family;
 	}
 

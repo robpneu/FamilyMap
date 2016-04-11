@@ -2,6 +2,7 @@ package edu.byu.robpneu.cs240.familymap.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -326,7 +327,7 @@ public class PersonActivity extends AppCompatActivity {
 				description.setText(event.toString());
 				subDescription.setText(mPerson.getFullName());
 				Filter filter = mFamilyMap.getFilterMap().get(event.getDescription());
-				imageView.setImageDrawable(filter.getIcon());
+				imageView.setImageDrawable(filter.getIcon().color(Color.BLACK));
 			} else { // Person
 				Person person = (Person) getChild(groupPosition, childPosition);
 				description.setText(person.getFullName());
@@ -342,6 +343,11 @@ public class PersonActivity extends AppCompatActivity {
 					subDescription.setText("Father");
 				} else if (person.getPersonID().equals(mPerson.getSpouseID())) {
 					subDescription.setText("Spouse");
+				} else if (person.getMotherID().equals(mPerson.getPersonID()) | person.getFatherID().equals(mPerson.getPersonID())) {
+					if (person.getGender().equals("f"))
+						subDescription.setText("Daughter");
+					else
+						subDescription.setText("Son");
 				} else {
 					Log.e("PersonActivityChildView", "person's ID is not spouse, father, or mother. Houston we have a problem.");
 				}
