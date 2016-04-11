@@ -6,7 +6,7 @@ package edu.byu.robpneu.cs240.familymap.dao;
  */
 public class Login {
 
-	private static Login mLogin;
+	private static Login instance;
 	private String mUserName;
 	private String mPassword;
 	private String mServerHost;
@@ -20,8 +20,8 @@ public class Login {
 		// Default login info to speed up debugging/testing
 		mUserName = "r";
 		mPassword = "n";
-//		mServerHost = "10.25.100.50";
-		mServerHost = "10.10.10.43";
+		mServerHost = "10.25.100.50";
+//		mServerHost = "10.10.10.43";
 		mServerPort = "8081";
 
 		// TA Credentials
@@ -32,10 +32,10 @@ public class Login {
 	}
 
 	public static Login getInstance(){
-		if (mLogin == null){
-			mLogin = new Login();
+		if (instance == null){
+			instance = new Login();
 		}
-		return mLogin;
+		return instance;
 	}
 
 	public String getUserName() {
@@ -88,5 +88,10 @@ public class Login {
 
 	public void setPersonID(String personID) {
 		mPersonID = personID;
+	}
+
+	public void logout(){
+		mPersonID = null;
+		mAuthToken = null;
 	}
 }

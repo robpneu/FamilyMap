@@ -1,6 +1,8 @@
 package edu.byu.robpneu.cs240.familymap.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -11,8 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
+
+import java.net.URL;
 
 import edu.byu.robpneu.cs240.familymap.R;
+import edu.byu.robpneu.cs240.familymap.dao.HttpClient;
 import edu.byu.robpneu.cs240.familymap.model.FamilyMap;
 import edu.byu.robpneu.cs240.familymap.model.Settings;
 
@@ -245,7 +251,8 @@ public class SettingActivity extends AppCompatActivity {
 		mReSyncData.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+				DownloadPeople downloadPeople = new DownloadPeople();
+				downloadPeople.execute();
 			}
 		});
 
@@ -254,8 +261,116 @@ public class SettingActivity extends AppCompatActivity {
 			@Override
 			public void onClick(View v) {
 				FamilyMap.getInstance().logout();
+				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(intent);
 			}
 		});
+
+	}
+
+
+	public class DownloadPeople extends AsyncTask<URL, Integer, String> {
+		/**
+		 * Override this method to perform a computation on a background thread. The
+		 * specified parameters are the parameters passed to {@link #execute}
+		 * by the caller of this task.
+		 * <p/>
+		 * This method can call {@link #publishProgress} to publish updates
+		 * on the UI thread.
+		 *
+		 * @param params The parameters of the task.
+		 * @return A result, defined by the subclass of this task.
+		 * @see #onPreExecute()
+		 * @see #onPostExecute
+		 * @see #publishProgress
+		 */
+		@Override
+		protected String doInBackground(URL... params) {
+			Log.i("Main download task", "it has begun");
+			if (FamilyMap.getInstance().isLoggedIn()) {
+				FamilyMap.getInstance().addPeople(HttpClient.getInstance().getAllPeople());
+				return "Done";
+			} else {
+				return null;
+			}
+		}
+
+		/**
+		 * <p>Runs on the UI thread after {@link #doInBackground}. The
+		 * specified result is the value returned by {@link #doInBackground}.</p>
+		 * <p/>
+		 * <p>This method won't be invoked if the task was cancelled.</p>
+		 *
+		 * @param s The result of the operation computed by {@link #doInBackground}.
+		 * @see #onPreExecute
+		 * @see #doInBackground
+		 * @see #onCancelled(Object)
+		 */
+		@Override
+		protected void onPostExecute(String s) {
+			Log.i("DownloadTask", "onPostExecute");
+			if (s == null) {
+				Log.i("resyncToast", "people download fail!");
+				Toast.makeText(getApplicationContext(), "Resync Failed. Please try again.", Toast.LENGTH_LONG).show();
+			} else {
+				Log.i("loginToast", "People Data Downloaded! ");
+//				Toast.makeText(getApplicationContext(), "People Data Downloaded!", Toast.LENGTH_LONG).show();
+				DownloadEvents downloadEvents = new DownloadEvents();
+				downloadEvents.execute();
+			}
+		}
+
+	}
+
+	public class DownloadEvents extends AsyncTask<URL, Integer, String> {
+		/**
+		 * Override this method to perform a computation on a background thread. The
+		 * specified parameters are the parameters passed to {@link #execute}
+		 * by the caller of this task.
+		 * <p/>
+		 * This method can call {@link #publishProgress} to publish updates
+		 * on the UI thread.
+		 *
+		 * @param params The parameters of the task.
+		 * @return A result, defined by the subclass of this task.
+		 * @see #onPreExecute()
+		 * @see #onPostExecute
+		 * @see #publishProgress
+		 */
+		@Override
+		protected String doInBackground(URL... params) {
+			Log.i("Main download task", "it has begun");
+			if (FamilyMap.getInstance().isLoggedIn()) {
+				FamilyMap.getInstance().addEvents(HttpClient.getInstance().getAllEvents());
+				return "Done";
+			} else {
+				return null;
+			}
+		}
+
+		/**
+		 * <p>Runs on the UI thread after {@link #doInBackground}. The
+		 * specified result is the value returned by {@link #doInBackground}.</p>
+		 * <p/>
+		 * <p>This method won't be invoked if the task was cancelled.</p>
+		 *
+		 * @param s The result of the operation computed by {@link #doInBackground}.
+		 * @see #onPreExecute
+		 * @see #doInBackground
+		 * @see #onCancelled(Object)
+		 */
+		@Override
+		protected void onPostExecute(String s) {
+			Log.i("DownloadTask", "onPostExecute");
+			if (s == null) {
+				Log.i("resyncToast", "people download fail!");
+				Toast.makeText(getApplicationContext(), "Resync Failed. Please try again.", Toast.LENGTH_LONG).show();
+			} else {
+				Log.i("loginToast", "Events Data Downloaded! ");
+				Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(intent);
+			}
+		}
 
 	}
 

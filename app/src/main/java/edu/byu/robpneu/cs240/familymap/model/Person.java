@@ -100,20 +100,18 @@ public class Person implements SearchActivity.Item{
 		mSpouseID = spouseID;
 	}
 
-	public void setFamilySide(String familySide){
-		mFamilySide = familySide;
-	}
-
 	public String getFamilySide() {
 		return mFamilySide;
 	}
 
+	public void setFamilySide(String familySide) {
+		mFamilySide = familySide;
+	}
+
 	@Override
 	public boolean contains(String search) {
-		if (mFirstName.contains(search))
+		if (mFirstName.toLowerCase().contains(search.toLowerCase()))
 			return true;
-		if(mLastName.contains(search))
-			return true;
-		return false;
+		return mLastName.toLowerCase().contains(search.toLowerCase());
 	}
 }

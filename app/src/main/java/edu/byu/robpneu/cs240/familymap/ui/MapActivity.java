@@ -1,5 +1,6 @@
 package edu.byu.robpneu.cs240.familymap.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,18 +10,20 @@ import android.view.MenuItem;
 
 import edu.byu.robpneu.cs240.familymap.R;
 import edu.byu.robpneu.cs240.familymap.model.Event;
+import edu.byu.robpneu.cs240.familymap.model.FamilyMap;
 
 public class MapActivity extends AppCompatActivity {
 	Event mEvent;
 	Fragment mMapFragment;
+	FamilyMap mFamilyMap;
+	MenuItem mGoToTopMenu;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		mFamilyMap = FamilyMap.getInstance();
+		getSupportActionBar().setTitle("FamilyMap");
 
-		if (savedInstanceState != null) {
-
-		}
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.map_fragment_container);
 		if (fragment == null) {
@@ -60,8 +63,11 @@ public class MapActivity extends AppCompatActivity {
 	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.up_menu, menu);
+		mGoToTopMenu = menu.findItem(R.id.menu_item_top);
+		mGoToTopMenu.setIcon(mFamilyMap.getDoubleUpIcon());
+
 		return super.onCreateOptionsMenu(menu);
-		//TODO add options menu
 	}
 
 	/**
@@ -82,7 +88,16 @@ public class MapActivity extends AppCompatActivity {
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		return super.onOptionsItemSelected(item);
-		//TODO wire up options menu
+		Intent intent;
+		if (item.getItemId() == R.id.menu_item_top) {
+			intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+			return true;
+		} else if (item.getItemId() == android.R.id.home) {
+			onBackPressed();
+			return true;
+		} else
+			return super.onOptionsItemSelected(item);
+
 	}
 }

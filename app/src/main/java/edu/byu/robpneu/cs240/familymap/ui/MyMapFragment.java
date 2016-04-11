@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amazon.geo.mapsv2.AmazonMap;
+import com.amazon.geo.mapsv2.CameraUpdateFactory;
 import com.amazon.geo.mapsv2.OnMapReadyCallback;
 import com.amazon.geo.mapsv2.SupportMapFragment;
 import com.amazon.geo.mapsv2.model.BitmapDescriptorFactory;
@@ -54,7 +55,6 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 //	private static final int BLUE = 240;
 //	private static final int PURPLE = 300;
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		mFamilyMap = FamilyMap.getInstance();
@@ -62,6 +62,8 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		mEventHashMap = new HashMap<>();
 		setHasOptionsMenu(true);
 		super.onCreate(savedInstanceState);
+		currentEvent = mFamilyMap.getCurrentEvent();
+		mFamilyMap.setCurrentEvent(null);
 	}
 
 	@Override
@@ -78,7 +80,7 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		eventDetails.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (currentPerson != null){
+				if (currentPerson != null) {
 					Intent intent = new Intent(getActivity(), PersonActivity.class);
 					intent.putExtra("PERSON_ID", currentPerson.getPersonID());
 					startActivity(intent);
@@ -98,11 +100,16 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 				mAmazonMap.setMapType(mSettings.getMapType());
 				mAmazonMap.getUiSettings().setMapToolbarEnabled(false);
 				putEventPins();
+				if (currentEvent != null) {
+					updateMarkerDetails(currentEvent);
+					mAmazonMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(currentEvent.getLatitude(), currentEvent.getLongitude()), 5.0f));
+				}
 				mAmazonMap.setOnMarkerClickListener(new AmazonMap.OnMarkerClickListener() {
 					@Override
 					public boolean onMarkerClick(Marker marker) {
 						Event event = mEventHashMap.get(marker.hashCode());
 						updateMarkerDetails(event);
+						mAmazonMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(event.getLatitude(), event.getLongitude()), 5.0f));
 						return false;
 					}
 				});
@@ -190,4 +197,10 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		personName.setText(person.getFullName());
 		personDetails.setText(event.toString());
 	}
+
+	private void drawMapLines() {
+
+	}
 }
+
+

@@ -24,6 +24,7 @@ public class FamilyMap {
 	private Map<String, Event> mEventMap;
 	private Map<String, Filter> mCustomFilters;
 	private List<Filter> mConstantFilters;
+	private Event mCurrentEvent;
 
 	private IconDrawable maleIcon;
 	private IconDrawable femaleIcon;
@@ -33,7 +34,6 @@ public class FamilyMap {
 	private IconDrawable filterIcon;
 	private IconDrawable gearIcon;
 	private IconDrawable doubleUpIcon;
-	private IconDrawable mapMarkerIcon;
 
 	private FamilyMap(){
 		mLoggedIn = false;
@@ -215,6 +215,15 @@ public class FamilyMap {
 		return searchedList;
 	}
 
+	public Event getCurrentEvent() {
+		return mCurrentEvent;
+	}
+
+	public void setCurrentEvent(Event currentEvent) {
+		mCurrentEvent = currentEvent;
+	}
+
+
 
 	public IconDrawable getMaleIcon() {
 		return maleIcon;
@@ -284,6 +293,9 @@ public class FamilyMap {
 	public void logout(){
 		mPersonMap = new HashMap<>();
 		mEventMap = new HashMap<>();
+		mCurrentEvent = null;
+		mCustomFilters = new HashMap<>();
+		Login.getInstance().logout();
 		mLoggedIn = false;
 	}
 }

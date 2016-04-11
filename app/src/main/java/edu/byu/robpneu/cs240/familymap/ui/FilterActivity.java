@@ -155,4 +155,5 @@ public class FilterActivity extends AppCompatActivity {
 			return mFilters.size();
 		}
 	}
+
 }

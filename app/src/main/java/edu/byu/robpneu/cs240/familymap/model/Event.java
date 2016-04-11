@@ -91,13 +91,13 @@ public class Event implements SearchActivity.Item, Comparable<Event> {
 
 	@Override
 	public boolean contains(String search) {
-		if (mCountry.contains(search))
+		if (mCountry.toLowerCase().contains(search.toLowerCase()))
 			return true;
-		if (mCity.contains(search))
+		if (mCity.toLowerCase().contains(search.toLowerCase()))
 			return true;
-		if (mYear.toString().contains(search))
+		if (mYear.toString().toLowerCase().contains(search.toLowerCase()))
 			return true;
-		return mDescription.contains(search);
+		return mDescription.toLowerCase().contains(search.toLowerCase());
 	}
 
 	/**

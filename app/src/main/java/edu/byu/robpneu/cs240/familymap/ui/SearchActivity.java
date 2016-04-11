@@ -1,6 +1,7 @@
 package edu.byu.robpneu.cs240.familymap.ui;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -100,6 +101,7 @@ public class SearchActivity extends AppCompatActivity {
 			if(mItem.getClass() == Person.class){
 				Person person = (Person) mItem;
 				mDescription.setText(person.getFullName());
+				mDescription.setTextColor(Color.BLACK);
 				mSubDescription.setText("");
 				String gender = person.getGender();
 				switch (gender){
@@ -118,6 +120,7 @@ public class SearchActivity extends AppCompatActivity {
 			else if(mItem.getClass() == Event.class){
 				Event event = (Event)mItem;
 				mDescription.setText(event.toString());
+				mDescription.setTextColor(Color.BLACK);
 				Person person = mFamilyMap.getPerson(event.getPersonID());
 				Filter filter = mFamilyMap.getFilterMap().get(event.getDescription());//.color(filter.getHSVColor())
 				mImageView.setImageDrawable(filter.getIcon());
@@ -128,6 +131,7 @@ public class SearchActivity extends AppCompatActivity {
 					mSubDescription.setText("");
 					Log.e("bindSearch Event", "Event's person was not found: " + event.getPersonID());
 				}
+				mSubDescription.setTextColor(Color.BLACK);
 			}
 			else
 				Log.e("BindSearch class type", "item was not a person or event class. it was: " + mItem.getClass());
@@ -147,7 +151,10 @@ public class SearchActivity extends AppCompatActivity {
 				startActivity(intent);
 			}
 			else if(mItem.getClass() == Event.class){
-				// TODO launch a map activity
+				Event event = (Event) mItem;
+				mFamilyMap.setCurrentEvent(event);
+				Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+				startActivity(intent);
 			}
 			else
 				Log.e("Search onClick", "class type: item was not a person or event class. it was: " + mItem.getClass());

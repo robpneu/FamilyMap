@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
 		familyMap.setFemaleIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_female).color(Color.MAGENTA).sizeDp(24));
 		familyMap.setAndroidIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_android).color(Color.GREEN).sizeDp(24));
 		familyMap.setEventIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_map_marker));
-		familyMap.setSearchIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_search));
-		familyMap.setFilterIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_filter));
-		familyMap.setGearIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_gear));
-		familyMap.setDoubleUpIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_angle_double_up));
+		familyMap.setSearchIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_search).actionBarSize().color(Color.WHITE));
+		familyMap.setFilterIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_filter).actionBarSize().color(Color.WHITE));
+		familyMap.setGearIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_gear).actionBarSize().color(Color.WHITE));
+		familyMap.setDoubleUpIcon(new IconDrawable(getApplicationContext(), Iconify.IconValue.fa_angle_double_up).actionBarSize().color(Color.WHITE));
 
 
 		if (!FamilyMap.getInstance().isLoggedIn()){
@@ -120,9 +120,14 @@ public class MainActivity extends AppCompatActivity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map_menu, menu);
 
+		FamilyMap familyMap = FamilyMap.getInstance();
+
 		MenuItem searchMenu = menu.findItem(R.id.menu_item_search);
 		MenuItem filterMenu = menu.findItem(R.id.menu_item_filter);
 		MenuItem settingsMenu = menu.findItem(R.id.menu_item_settings);
+		searchMenu.setIcon(familyMap.getSearchIcon());
+		filterMenu.setIcon(familyMap.getFilterIcon());
+		settingsMenu.setIcon(familyMap.getGearIcon());
 
 		if (!FamilyMap.getInstance().isLoggedIn()) {
 			searchMenu.setVisible(false);
