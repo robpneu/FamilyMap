@@ -16,10 +16,13 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import java.net.URL;
+import java.util.Map;
 
 import edu.byu.robpneu.cs240.familymap.R;
 import edu.byu.robpneu.cs240.familymap.dao.HttpClient;
+import edu.byu.robpneu.cs240.familymap.model.Event;
 import edu.byu.robpneu.cs240.familymap.model.FamilyMap;
+import edu.byu.robpneu.cs240.familymap.model.Person;
 import edu.byu.robpneu.cs240.familymap.model.Settings;
 
 public class SettingActivity extends AppCompatActivity {
@@ -268,7 +271,6 @@ public class SettingActivity extends AppCompatActivity {
 
 	}
 
-
 	public class DownloadPeople extends AsyncTask<URL, Integer, String> {
 		/**
 		 * Override this method to perform a computation on a background thread. The
@@ -288,8 +290,13 @@ public class SettingActivity extends AppCompatActivity {
 		protected String doInBackground(URL... params) {
 			Log.i("Main download task", "it has begun");
 			if (FamilyMap.getInstance().isLoggedIn()) {
-				FamilyMap.getInstance().addPeople(HttpClient.getInstance().getAllPeople());
-				return "Done";
+				Map<String, Person> people = HttpClient.getInstance().getAllPeople();
+				if (people.size() > 0 ) {
+					FamilyMap.getInstance().addPeople(people);
+					return "Done";
+				}
+				else
+					return null;
 			} else {
 				return null;
 			}
@@ -341,8 +348,13 @@ public class SettingActivity extends AppCompatActivity {
 		protected String doInBackground(URL... params) {
 			Log.i("Main download task", "it has begun");
 			if (FamilyMap.getInstance().isLoggedIn()) {
-				FamilyMap.getInstance().addEvents(HttpClient.getInstance().getAllEvents());
-				return "Done";
+				Map<String, Event> events = HttpClient.getInstance().getAllEvents();
+				if (events.size() > 0) {
+					FamilyMap.getInstance().addEvents(events);
+					return "Done";
+				}
+				else
+					return null;
 			} else {
 				return null;
 			}

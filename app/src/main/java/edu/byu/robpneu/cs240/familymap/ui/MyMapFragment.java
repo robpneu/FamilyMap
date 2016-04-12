@@ -18,9 +18,13 @@ import com.amazon.geo.mapsv2.model.BitmapDescriptorFactory;
 import com.amazon.geo.mapsv2.model.LatLng;
 import com.amazon.geo.mapsv2.model.Marker;
 import com.amazon.geo.mapsv2.model.MarkerOptions;
+import com.amazon.geo.mapsv2.model.Polyline;
+import com.amazon.geo.mapsv2.model.PolylineOptions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import edu.byu.robpneu.cs240.familymap.R;
@@ -42,6 +46,7 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 	private Map<Integer, Event> mEventHashMap;
 	private Person currentPerson;
 	private Event currentEvent;
+	private List<Polyline> mPolylines;
 
 	private ImageView genderIcon;
 	private TextView personName;
@@ -64,6 +69,7 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		super.onCreate(savedInstanceState);
 		currentEvent = mFamilyMap.getCurrentEvent();
 		mFamilyMap.setCurrentEvent(null);
+		mPolylines = new ArrayList<>();
 	}
 
 	@Override
@@ -109,8 +115,9 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 					public boolean onMarkerClick(Marker marker) {
 						Event event = mEventHashMap.get(marker.hashCode());
 						updateMarkerDetails(event);
-						mAmazonMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(event.getLatitude(), event.getLongitude()), 5.0f));
-						return false;
+						drawMapLines();
+						mAmazonMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(event.getLatitude(), event.getLongitude()), 4.0f));
+						return true;
 					}
 				});
 				mAmazonMap.setOnMapClickListener(new AmazonMap.OnMapClickListener() {
@@ -180,6 +187,79 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		}
 	}
 
+
+	private void drawMapLines() {
+		for (Polyline polyline : mPolylines) {
+			polyline.remove();
+		}
+		mPolylines.clear();
+
+		if (currentPerson != null) {
+			if (mSettings.showLifeStoryLines()) {
+				int lifeStoryLinesColor = mSettings.getLifeStoryLinesColor();
+				List<LatLng> pnts = new ArrayList<>();
+				List<Object> events = mFamilyMap.getEventsByPerson(currentPerson.getPersonID());
+				if (events.size() > 0) {
+					pnts.add(currentEvent.getLatLng());
+					for (Object e : events) {
+						Event event = (Event) e;
+						pnts.add(event.getLatLng());
+						PolylineOptions polylineOptions = new PolylineOptions().addAll(pnts).color(lifeStoryLinesColor).width(9f);
+						mPolylines.add(mAmazonMap.addPolyline(polylineOptions));
+					}
+				}
+			}
+
+			if (mSettings.showFamilyStoryLines()) {
+				recursiveFamilyLines(currentPerson, currentEvent, 9f);
+			}
+
+			if (mSettings.showSpouseLines()) {
+				int spouseLinesColor = mSettings.getSpouseLinesColor();
+				List<LatLng> pnts = new ArrayList<>();
+				String spouseID = currentPerson.getSpouseID();
+				if (spouseID != null) {
+					List<Object> events = mFamilyMap.getEventsByPerson(spouseID);
+					if (events.size() > 0) {
+						Event earliestEvent = (Event) events.get(0);
+						pnts.add(currentEvent.getLatLng());
+						pnts.add(earliestEvent.getLatLng());
+						PolylineOptions polylineOptions = new PolylineOptions().addAll(pnts).color(spouseLinesColor).width(9f);
+						mPolylines.add(mAmazonMap.addPolyline(polylineOptions));
+					}
+				}
+			}
+		}
+	}
+
+	private void recursiveFamilyLines(Person person, Event event, float thickness) {
+		if (person.getFatherID() != null) {
+			List<LatLng> pnts = new ArrayList<>();
+			List<Object> events = mFamilyMap.getEventsByPerson(person.getFatherID());
+			if (events.size() > 0) {
+				pnts.add(event.getLatLng());
+				Event earliestEvent = (Event) events.get(0);
+				pnts.add(earliestEvent.getLatLng());
+				PolylineOptions polylineOptions = new PolylineOptions().addAll(pnts).color(mSettings.getFamilyStoryLinesColor()).width(thickness);
+				mPolylines.add(mAmazonMap.addPolyline(polylineOptions));
+				recursiveFamilyLines(mFamilyMap.getPerson(person.getFatherID()), earliestEvent, thickness - 3f);
+			}
+		}
+		if (person.getMotherID() != null) {
+			List<LatLng> pnts = new ArrayList<>();
+			List<Object> events = mFamilyMap.getEventsByPerson(person.getMotherID());
+			if (events.size() > 0) {
+				pnts.add(event.getLatLng());
+				Event earliestEvent = (Event) events.get(0);
+				pnts.add(earliestEvent.getLatLng());
+				PolylineOptions polylineOptions = new PolylineOptions().addAll(pnts).color(mSettings.getFamilyStoryLinesColor()).width(thickness);
+				mPolylines.add(mAmazonMap.addPolyline(polylineOptions));
+				recursiveFamilyLines(mFamilyMap.getPerson(person.getMotherID()), earliestEvent, thickness - 3f);
+			}
+		}
+
+	}
+
 	private void updateMarkerDetails(Event event){
 		Person person = mFamilyMap.getPerson(event.getPersonID());
 		currentEvent = event;
@@ -196,10 +276,6 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		}
 		personName.setText(person.getFullName());
 		personDetails.setText(event.toString());
-	}
-
-	private void drawMapLines() {
-
 	}
 }
 

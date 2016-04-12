@@ -7,6 +7,9 @@ import android.graphics.Color;
  * @version 1.0 3/26/16
  */
 public class Settings {
+	private static final int orange = Color.rgb(255, 165, 0);
+	private static final int purple = Color.rgb(128, 0, 128);
+	private static final int brown = Color.rgb(165, 42, 42);
 	private static Settings instance;
 	private boolean mLifeStoryLines;
 	private int mLifeStoryLinesColor;
@@ -16,17 +19,12 @@ public class Settings {
 	private int mSpouseLinesColor;
 	private int mMapType;
 
-	private static final int orange = Color.rgb(255, 165, 0);
-	private static final int purple = Color.rgb(128, 0, 128);
-	private static final int brown = Color.rgb(165, 42, 42);
-
 	private Settings() {
-		// TODO Figure out default settings
-		mLifeStoryLines = false;
+		mLifeStoryLines = true;
 		mLifeStoryLinesColor = Color.RED;
-		mFamilyStoryLines = false;
+		mFamilyStoryLines = true;
 		mFamilyStoryLinesColor = Color.BLUE;
-		mSpouseLines = false;
+		mSpouseLines = true;
 		mSpouseLinesColor = Color.GREEN;
 		mMapType = 1; // defaults to Map_Type_Noraml, which is int = 1;
 	}
@@ -36,6 +34,22 @@ public class Settings {
 			instance = new Settings();
 		}
 		return instance;
+	}
+
+	public boolean showLifeStoryLines() {
+		return mLifeStoryLines;
+	}
+
+	public void setShowLifeStoryLines(boolean lifeStoryLines) {
+		mLifeStoryLines = lifeStoryLines;
+	}
+
+	public int getLifeStoryLinesColor() {
+		return mLifeStoryLinesColor;
+	}
+
+	public int getLifeStoryLinesSpinnerColor(){
+		return getSpinnerColor(mLifeStoryLinesColor);
 	}
 
 	private int getSpinnerColor(int incomingColor){
@@ -57,22 +71,6 @@ public class Settings {
 			return 7;
 		else
 			return 0;
-	}
-
-	public boolean showLifeStoryLines() {
-		return mLifeStoryLines;
-	}
-
-	public void setShowLifeStoryLines(boolean lifeStoryLines) {
-		mLifeStoryLines = lifeStoryLines;
-	}
-
-	public int getLifeStoryLinesColor() {
-		return mLifeStoryLinesColor;
-	}
-
-	public int getLifeStoryLinesSpinnerColor(){
-		return getSpinnerColor(mLifeStoryLinesColor);
 	}
 
 	public void setShowLifeStoryLinesColor(int lifeStoryLinesColor) {

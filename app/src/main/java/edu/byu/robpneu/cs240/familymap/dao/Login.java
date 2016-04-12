@@ -16,19 +16,18 @@ public class Login {
 
 
 	private Login(){
-		// TODO remove default login info
 		// Default login info to speed up debugging/testing
-		mUserName = "r";
-		mPassword = "n";
-		mServerHost = "10.25.100.50";
-//		mServerHost = "10.10.10.43";
-		mServerPort = "8081";
+//		mUserName = "r";
+//		mPassword = "n";
+//		mServerHost = "10.25.100.50";
+////		mServerHost = "10.10.10.43";
+//		mServerPort = "8081";
 
 		// TA Credentials
 //		mUserName = "sheila";
 //		mPassword = "parker";
-//		mServerHost = "192.168.14.39";
-//		mServerPort = "8008";
+//		mServerHost = "192.168.250.17";
+//		mServerPort = "8888";
 	}
 
 	public static Login getInstance(){
@@ -91,6 +90,10 @@ public class Login {
 	}
 
 	public void logout(){
+		mUserName = null;
+		mPassword = null;
+		mServerHost = null;
+		mServerPort = null;
 		mPersonID = null;
 		mAuthToken = null;
 	}

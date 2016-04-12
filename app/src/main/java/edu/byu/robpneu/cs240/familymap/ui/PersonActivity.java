@@ -343,7 +343,7 @@ public class PersonActivity extends AppCompatActivity {
 					subDescription.setText("Father");
 				} else if (person.getPersonID().equals(mPerson.getSpouseID())) {
 					subDescription.setText("Spouse");
-				} else if (person.getMotherID().equals(mPerson.getPersonID()) | person.getFatherID().equals(mPerson.getPersonID())) {
+				} else if (mPerson.getPersonID().equals(person.getMotherID()) | mPerson.getPersonID().equals(person.getFatherID())) {
 					if (person.getGender().equals("f"))
 						subDescription.setText("Daughter");
 					else

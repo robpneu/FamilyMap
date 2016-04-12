@@ -1,5 +1,7 @@
 package edu.byu.robpneu.cs240.familymap.model;
 
+import com.amazon.geo.mapsv2.model.LatLng;
+
 import edu.byu.robpneu.cs240.familymap.ui.SearchActivity;
 
 /**
@@ -59,6 +61,10 @@ public class Event implements SearchActivity.Item, Comparable<Event> {
 
 	public void setLongitude(double longitude) {
 		mLongitude = longitude;
+	}
+
+	public LatLng getLatLng() {
+		return new LatLng(mLatitude, mLongitude);
 	}
 
 	public String getCountry() {
