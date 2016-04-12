@@ -72,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
 		setContentView(R.layout.activity_main);
 	}
 
+	/**
+	 * Executes a logout
+	 * Removes the map fragment and adds the login fragment again
+	 * Runs the FamilyMap logout method
+	 */
 	public void onLogout() {
-		// TODO make sure I go to top before running this? I think I'll already be at the top...
 		FragmentManager fragmentManager = getSupportFragmentManager();
 		fragmentManager.beginTransaction().remove(mMapFragment);
 		if (mloginFragment == null) {
@@ -83,6 +87,10 @@ public class MainActivity extends AppCompatActivity {
 		FamilyMap.getInstance().logout();
 	}
 
+	/**
+	 * Starts async task to download the people
+	 * When it completes it will start the async task to download the events.
+	 */
 	public void onLogin() {
 		DownloadPeople downloadPeople = new DownloadPeople();
 		downloadPeople.execute();
@@ -175,6 +183,10 @@ public class MainActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * Async task to download all of the people
+	 * If it was successful it starts the download events async task on post execute
+	 */
 	public class DownloadPeople extends AsyncTask<URL, Integer, String>{
 		/**
 		 * Override this method to perform a computation on a background thread. The
@@ -230,6 +242,10 @@ public class MainActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * Async task to download all of the events
+	 * If it was successful it removes the login fragment and starts the map fragment
+	 */
 	public class DownloadEvents extends AsyncTask<URL, Integer, String> {
 		/**
 		 * Override this method to perform a computation on a background thread. The

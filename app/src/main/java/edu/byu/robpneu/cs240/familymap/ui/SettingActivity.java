@@ -271,6 +271,10 @@ public class SettingActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * Async task to download all of the people
+	 * If it was successful it starts the download events async task on post execute
+	 */
 	public class DownloadPeople extends AsyncTask<URL, Integer, String> {
 		/**
 		 * Override this method to perform a computation on a background thread. The
@@ -329,6 +333,10 @@ public class SettingActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * Async task to download all of the events
+	 * If it was successful it will start the main activity again
+	 */
 	public class DownloadEvents extends AsyncTask<URL, Integer, String> {
 		/**
 		 * Override this method to perform a computation on a background thread. The

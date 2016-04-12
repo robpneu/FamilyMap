@@ -11,60 +11,60 @@
     tools:context="edu.byu.robpneu.cs240.familymap.ui.SettingActivity">
 
 
-    <!-- TODO Fix mix alligned layout issues on spinners-->
+    <!-- TODO Fix mis-alligned layout issues on spinners-->
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:orientation="vertical">
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:weightSum="1">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.70"
-                android:measureWithLargestChild="false">
+                android:measureWithLargestChild="false"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
                     android:id="@+id/first_name"
-                    android:linksClickable="true"
-                    android:foregroundTintMode="multiply"
-                    android:singleLine="false"
-                    android:paddingTop="10dp"
-                    android:text="Life Story Lines"/>
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="SHOW LIFE STORY LINES"
+                    android:foregroundTintMode="multiply"
+                    android:linksClickable="true"
+                    android:paddingTop="10dp"
+                    android:singleLine="false"
+                    android:text="Life Story Lines"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
                     android:id="@+id/lifeStoryLinesID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
                     android:singleLine="false"
-                    android:paddingLeft="5dp"/>
+                    android:text="SHOW LIFE STORY LINES"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
 
             </LinearLayout>
 
             <Spinner
-                android:layout_width="140dp"
-                android:layout_height="match_parent"
                 android:id="@+id/lifeStoryLinesColor"
-                android:spinnerMode="dropdown"
-                android:layout_weight="0.3"/>
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.3"
+                android:spinnerMode="dropdown"/>
 
             <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
                 android:id="@+id/lifeStoryLinesSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:checked="false"
                 />
 
@@ -76,155 +76,155 @@
             android:background="#000000" />
 
         <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="7">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/last_name"
-                    android:linksClickable="true"
-                    android:foregroundTintMode="multiply"
-                    android:singleLine="false"
-                    android:paddingTop="10dp"
-                    android:text="Family Tree Lines"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="SHOW TREE LINES"
-                    android:id="@+id/showTreeLinesID"
-                    android:singleLine="false"
-                    android:paddingLeft="5dp"/>
-
-            </LinearLayout>
-
-            <Spinner
-                android:layout_width="140dp"
-                android:layout_height="match_parent"
-                android:id="@+id/familyLinesColor"
-                android:spinnerMode="dropdown"
-                android:layout_weight="3"/>
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/familyTreeLinesSwitch"
-                android:checked="false"
-                />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="7">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/spouseLinesID"
-                    android:linksClickable="true"
-                    android:foregroundTintMode="multiply"
-                    android:singleLine="false"
-                    android:paddingTop="10dp"
-                    android:text="Spouse Lines"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="SHOW SPOUSE LINES"
-                    android:id="@+id/textView4"
-                    android:singleLine="false"
-                    android:paddingLeft="5dp"/>
-
-            </LinearLayout>
-
-            <Spinner
-                android:layout_width="140dp"
-                android:layout_height="match_parent"
-                android:id="@+id/spouseLinesColor"
-                android:spinnerMode="dropdown"
-                android:layout_weight="3"/>
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:id="@+id/spouseLinesSwitch"
-                android:checked="false"
-                />
-
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000000" />
-
-        <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:gravity="right">
+            android:orientation="horizontal">
 
             <LinearLayout
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foregroundTintMode="multiply"
+                    android:linksClickable="true"
+                    android:paddingTop="10dp"
+                    android:singleLine="false"
+                    android:text="Family Tree Lines"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:id="@+id/showTreeLinesID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:singleLine="false"
+                    android:text="SHOW TREE LINES"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/familyLinesColor"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:spinnerMode="dropdown"/>
+
+            <Switch
+                android:id="@+id/familyTreeLinesSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="false"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/spouseLinesID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foregroundTintMode="multiply"
+                    android:linksClickable="true"
+                    android:paddingTop="10dp"
+                    android:singleLine="false"
+                    android:text="Spouse Lines"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="5dp"
+                    android:singleLine="false"
+                    android:text="SHOW SPOUSE LINES"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+            </LinearLayout>
+
+            <Spinner
+                android:id="@+id/spouseLinesColor"
+                android:layout_width="140dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:spinnerMode="dropdown"/>
+
+            <Switch
+                android:id="@+id/spouseLinesSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:checked="false"
+                />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_weight="0.70"
+                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/mapTypeLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/mapTypeLabel"
-                    android:linksClickable="true"
                     android:foregroundTintMode="multiply"
-                    android:singleLine="false"
+                    android:linksClickable="true"
                     android:paddingTop="10dp"
-                    android:text="Map Type"/>
+                    android:singleLine="false"
+                    android:text="Map Type"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/mapTypeDescrption"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="BACKGROUND DISPLAY ON MAP"
-                    android:id="@+id/mapTypeDescrption"
+                    android:paddingLeft="5dp"
                     android:singleLine="false"
-                    android:paddingLeft="5dp"/>
+                    android:text="BACKGROUND DISPLAY ON MAP"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
             </LinearLayout>
 
             <Spinner
+                android:id="@+id/mapTypeSpinner"
                 android:layout_width="140dp"
                 android:layout_height="match_parent"
-                android:id="@+id/mapTypeSpinner"
-                android:spinnerMode="dropdown"
-                android:layout_weight="0.3"/>
+                android:layout_weight="0.3"
+                android:spinnerMode="dropdown"/>
 
         </LinearLayout>
 
@@ -236,37 +236,37 @@
         </View>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/reSyncDataLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:id="@+id/reSyncDataLayout">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/resyncData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/resyncData"
-                    android:linksClickable="true"
                     android:foregroundTintMode="multiply"
-                    android:singleLine="false"
+                    android:linksClickable="true"
                     android:paddingTop="10dp"
-                    android:text="Re-sync Data"/>
+                    android:singleLine="false"
+                    android:text="Re-sync Data"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/resyncDataDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="FROM FAMILYMAP SERVICE"
-                    android:id="@+id/resyncDataDescription"
+                    android:paddingLeft="5dp"
                     android:singleLine="false"
-                    android:paddingLeft="5dp"/>
+                    android:text="FROM FAMILYMAP SERVICE"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
             </LinearLayout>
 
         </LinearLayout>
@@ -279,37 +279,37 @@
         </View>
 
         <LinearLayout
-            android:orientation="horizontal"
+            android:id="@+id/logoutLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="1"
-            android:id="@+id/logoutLayout">
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
                 >
 
                 <TextView
+                    android:id="@+id/logout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:id="@+id/logout"
-                    android:linksClickable="true"
                     android:foregroundTintMode="multiply"
-                    android:singleLine="false"
+                    android:linksClickable="true"
                     android:paddingTop="10dp"
-                    android:text="Logout"/>
+                    android:singleLine="false"
+                    android:text="Logout"
+                    android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 <TextView
+                    android:id="@+id/logoutDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="RETURNS TO LOGIN SCREEN"
-                    android:id="@+id/logoutDescription"
+                    android:paddingLeft="5dp"
                     android:singleLine="false"
-                    android:paddingLeft="5dp"/>
+                    android:text="RETURNS TO LOGIN SCREEN"
+                    android:textAppearance="?android:attr/textAppearanceSmall"/>
             </LinearLayout>
 
         </LinearLayout>

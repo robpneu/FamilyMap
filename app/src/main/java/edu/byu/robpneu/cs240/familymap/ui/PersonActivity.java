@@ -45,7 +45,6 @@ public class PersonActivity extends AppCompatActivity {
 		mFamilyMap = FamilyMap.getInstance();
 		setContentView(R.layout.activity_person);
 		getSupportActionBar().setTitle("FamilyMap: Person Details");
-		// TODO set up up button on menu bar
 		String personID = getIntent().getStringExtra("PERSON_ID");
 		mPerson = mFamilyMap.getPerson(personID);
 

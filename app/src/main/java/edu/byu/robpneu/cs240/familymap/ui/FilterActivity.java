@@ -39,6 +39,9 @@ public class FilterActivity extends AppCompatActivity {
 
 	}
 
+	/**
+	 * Updates the recycler view using the filter adapter
+	 */
 	private void updateUI(){
 		List<Filter> filters = FamilyMap.getInstance().getFiltersList();
 		mFilterAdapter = new FilterAdapter(filters);

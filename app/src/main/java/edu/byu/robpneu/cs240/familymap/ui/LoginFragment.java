@@ -16,9 +16,9 @@ import android.widget.Toast;
 
 import java.net.URL;
 
+import edu.byu.robpneu.cs240.familymap.R;
 import edu.byu.robpneu.cs240.familymap.dao.HttpClient;
 import edu.byu.robpneu.cs240.familymap.dao.Login;
-import edu.byu.robpneu.cs240.familymap.R;
 import edu.byu.robpneu.cs240.familymap.model.FamilyMap;
 
 /**
@@ -172,6 +172,10 @@ public class LoginFragment extends Fragment {
 		return v;
 	}
 
+	/**
+	 * Starts the login asynch task
+	 * On successful post execute of the asynch task it will begin the onLogin method in the main activity
+	 */
 	public class DownloadTask extends AsyncTask<URL, Integer, String>{
 		/**
 		 * Override this method to perform a computation on a background thread. The

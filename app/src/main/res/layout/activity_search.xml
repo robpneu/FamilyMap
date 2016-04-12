@@ -11,18 +11,17 @@
     tools:context="edu.byu.robpneu.cs240.familymap.ui.SearchActivity">
 
     <EditText
+        android:id="@+id/SearchBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/SearchBox"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:hint="Enter a single search term"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_recycler_view"
-        android:layout_below="@id/SearchBox"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@id/SearchBox"/>
 
-    <!-- TODO create whatever view will handle all of the search results-->
 </RelativeLayout>

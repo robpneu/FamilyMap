@@ -36,7 +36,6 @@ public class SearchActivity extends AppCompatActivity {
 	private SearchAdapter mSearchAdapter;
 
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,6 +65,12 @@ public class SearchActivity extends AppCompatActivity {
 		updateUI("");
 	}
 
+	/**
+	 * Updates the recycler view of search results.
+	 * Is called whenever the search box changes
+	 *
+	 * @param searchTerm
+	 */
 	private void updateUI(String searchTerm) {
 		if (searchTerm.length() > 0) {
 			List<Item> items = mFamilyMap.searchAll(searchTerm);
@@ -74,6 +79,9 @@ public class SearchActivity extends AppCompatActivity {
 		}
 	}
 
+	/**
+	 * An interface that Person and Event models implement to assist in searching
+	 */
 	public interface Item {
 		boolean contains(String search);
 	}

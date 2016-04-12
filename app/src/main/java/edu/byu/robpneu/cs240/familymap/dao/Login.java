@@ -1,6 +1,8 @@
 package edu.byu.robpneu.cs240.familymap.dao;
 
 /**
+ * Object to keep track of all DAO login information. Essentially the object helper for the HttpClient object.
+ *
  * @author Robert P Neu
  * @version 1.0 3/17/16
  */
@@ -13,6 +15,7 @@ public class Login {
 	private String mServerPort;
 	private String mAuthToken;
 	private String mPersonID;
+
 
 
 	private Login(){
@@ -30,6 +33,11 @@ public class Login {
 //		mServerPort = "8888";
 	}
 
+	/**
+	 * Returns the singleton instance
+	 *
+	 * @return instance of the Login object.
+	 */
 	public static Login getInstance(){
 		if (instance == null){
 			instance = new Login();
@@ -53,22 +61,18 @@ public class Login {
 		mPassword = password;
 	}
 
-	public String getServerHost() {
-		return mServerHost;
-	}
-
 	public void setServerHost(String serverHost) {
 		mServerHost = serverHost;
-	}
-
-	public String getServerPort() {
-		return mServerPort;
 	}
 
 	public void setServerPort(String serverPort) {
 		mServerPort = serverPort;
 	}
 
+	/**
+	 * Gets a usable url based on the server host and server port variables
+	 * @return the full URL
+	 */
 	public String getURL(){
 		return mServerHost + ":" + mServerPort;
 	}
@@ -89,6 +93,9 @@ public class Login {
 		mPersonID = personID;
 	}
 
+	/**
+	 * Resets all of the login information when it is called to ensure that information can't be used without re-authenticating
+	 */
 	public void logout(){
 		mUserName = null;
 		mPassword = null;

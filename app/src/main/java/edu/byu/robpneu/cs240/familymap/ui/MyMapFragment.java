@@ -53,12 +53,6 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 	private TextView personDetails;
 	private LinearLayout eventDetails;
 
-//	private static final int RED = 0;
-//	private static final int ORANGE = 30;
-//	private static final int YELLOW = 60;
-//	private static final int GREEN = 120;
-//	private static final int BLUE = 240;
-//	private static final int PURPLE = 300;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -136,7 +130,7 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 	}
 
 	/**
-	 * Put all of the vent pins onto the map
+	 * Put all of the event pins onto the map
 	 */
 	private void putEventPins() {
 		Map<String, Event> mEvents = mFamilyMap.getEventMap();
@@ -187,7 +181,9 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		}
 	}
 
-
+	/**
+	 * Draw all of the map lines onto the map
+	 */
 	private void drawMapLines() {
 		for (Polyline polyline : mPolylines) {
 			polyline.remove();
@@ -232,6 +228,18 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 		}
 	}
 
+	/**
+	 * Recursive map lines drawing helper for the family lines
+	 * It will draw lines between the incoming person's mother and father's earliest events
+	 * and the incoming event, which belongs to the incoming person
+	 *
+	 * The thickness of each line drawn is smaller as we get father back into the family tree
+	 * This is found as the recursion gets deeper
+	 *
+	 * @param person the current person we're on
+	 * @param event the current event that we're drawing from
+	 * @param thickness the incoming thickness of the line
+	 */
 	private void recursiveFamilyLines(Person person, Event event, float thickness) {
 		if (person.getFatherID() != null) {
 			List<LatLng> pnts = new ArrayList<>();
@@ -260,6 +268,11 @@ public class MyMapFragment extends android.support.v4.app.Fragment {
 
 	}
 
+	/**
+	 * Updates the bar below the map on the bottom of the screen with the selected event's information
+	 *
+	 * @param event the selected event to be updated.
+	 */
 	private void updateMarkerDetails(Event event){
 		Person person = mFamilyMap.getPerson(event.getPersonID());
 		currentEvent = event;
