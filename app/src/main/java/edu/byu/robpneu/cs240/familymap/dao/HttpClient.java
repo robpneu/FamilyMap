@@ -134,10 +134,6 @@ public class HttpClient {
 				JSONObject rootObj = new JSONObject(responseBodyData);
 				return rootObj;
 			}
-//			else {
-//				// SERVER RETURNED AN HTTP ERROR
-//
-//			}
 		}
 		catch (IOException e) {
 			// IO ERROR

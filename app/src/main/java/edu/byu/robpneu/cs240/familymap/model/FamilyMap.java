@@ -318,6 +318,21 @@ public class FamilyMap {
 	}
 
 	/**
+	 * Processes a logout
+	 */
+	public void logout() {
+		mPersonMap = new HashMap<>();
+		mEventMap = new HashMap<>();
+		mCurrentEvent = null;
+		mCustomFilters = new HashMap<>();
+		Login.getInstance().logout();
+		mLoggedIn = false;
+	}
+
+
+
+
+	/**
 	 * Get the male icon
 	 * @return IconDrawable male icon
 	 */
@@ -443,17 +458,5 @@ public class FamilyMap {
 	 */
 	public void setDoubleUpIcon(IconDrawable doubleUpIcon) {
 		this.doubleUpIcon = doubleUpIcon;
-	}
-
-	/**
-	 * Processes a logout
-	 */
-	public void logout(){
-		mPersonMap = new HashMap<>();
-		mEventMap = new HashMap<>();
-		mCurrentEvent = null;
-		mCustomFilters = new HashMap<>();
-		Login.getInstance().logout();
-		mLoggedIn = false;
 	}
 }

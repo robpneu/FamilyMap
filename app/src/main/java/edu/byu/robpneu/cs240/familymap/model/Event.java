@@ -44,30 +44,6 @@ public class Event implements SearchActivity.Item, Comparable<Event> {
 		mDescendant = descendant;
 	}
 
-	public String getEventID() {
-		return mEventID;
-	}
-
-	public String getPersonID() {
-		return mPersonID;
-	}
-
-	public double getLatitude() {
-		return mLatitude;
-	}
-
-	public double getLongitude() {
-		return mLongitude;
-	}
-
-	public String getCountry() {
-		return mCountry;
-	}
-
-	public String getCity() {
-		return mCity;
-	}
-
 	/**
 	 * Gets an easier to work with LatLang object.
 	 * The LatLng object includes the latitude and longitude of the event in a single object
@@ -76,16 +52,6 @@ public class Event implements SearchActivity.Item, Comparable<Event> {
 	 */
 	public LatLng getLatLng() {
 		return new LatLng(mLatitude, mLongitude);
-	}
-
-	/**
-	 * Puts together a useable string for display the basic infomraiton about an event.
-	 * Includes the city country, and year.
-	 * the format is: City, Country (Year)
-	 * @return
-	 */
-	public String toString() {
-		return mDescription.toLowerCase() + ": " + mCity + ", " + mCountry + " (" + mYear.intValue() + ")";
 	}
 
 	/**
@@ -146,5 +112,85 @@ public class Event implements SearchActivity.Item, Comparable<Event> {
 
 	public String getDescription() {
 		return mDescription;
+	}
+
+	/**
+	 * Compares this instance with the specified object and indicates if they
+	 * are equal. In order to be equal, {@code o} must represent the same object
+	 * as this instance using a class-specific comparison. The general contract
+	 * is that this comparison should be reflexive, symmetric, and transitive.
+	 * Also, no object reference other than null is equal to null.
+	 * <p>
+	 * <p>The default implementation returns {@code true} only if {@code this ==
+	 * o}. See <a href="{@docRoot}reference/java/lang/Object.html#writing_equals">Writing a correct
+	 * {@code equals} method</a>
+	 * if you intend implementing your own {@code equals} method.
+	 * <p>
+	 * <p>The general contract for the {@code equals} and {@link
+	 * #hashCode()} methods is that if {@code equals} returns {@code true} for
+	 * any two objects, then {@code hashCode()} must return the same value for
+	 * these objects. This means that subclasses of {@code Object} usually
+	 * override either both methods or neither of them.
+	 *
+	 * @param o the object to compare this instance with.
+	 * @return {@code true} if the specified object is equal to this {@code
+	 * Object}; {@code false} otherwise.
+	 * @see #hashCode
+	 */
+	@Override
+	public boolean equals(Object o) {
+		if (!o.getClass().equals(this.getClass()))
+			return false;
+
+		Event event = (Event) o;
+		if (!mPersonID.equals(event.getPersonID()))
+			return false;
+		if (!mCity.equals(event.getCity()))
+			return false;
+		if (!mDescription.equals(event.getDescription()))
+			return false;
+		if (!mYear.equals(event.getYear()))
+			return false;
+		if (!mCountry.equals(event.getCountry()))
+			return false;
+		if (!Double.valueOf(mLatitude).equals(Double.valueOf(event.getLatitude())))
+			return false;
+		if (!Double.valueOf(mLongitude).equals(Double.valueOf(event.getLongitude())))
+			return false;
+		return mEventID.equals(event.getEventID());
+	}
+
+	public String getPersonID() {
+		return mPersonID;
+	}
+
+	public String getCity() {
+		return mCity;
+	}
+
+	public String getCountry() {
+		return mCountry;
+	}
+
+	public double getLatitude() {
+		return mLatitude;
+	}
+
+	public double getLongitude() {
+		return mLongitude;
+	}
+
+	public String getEventID() {
+		return mEventID;
+	}
+
+	/**
+	 * Puts together a useable string for display the basic infomraiton about an event.
+	 * Includes the city country, and year.
+	 * the format is: City, Country (Year)
+	 * @return
+	 */
+	public String toString() {
+		return mDescription.toLowerCase() + ": " + mCity + ", " + mCountry + " (" + mYear.intValue() + ")";
 	}
 }
